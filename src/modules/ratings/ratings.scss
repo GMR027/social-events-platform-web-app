@@ -1,0 +1,39 @@
+.Ratings {
+  width: fit-content;
+
+  &__star {
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+
+    &--x-small {
+      font-size: 0.6em !important;
+    }
+    &--small {
+      font-size: 0.8em !important;
+    }
+    &--medium {
+      font-size: 1em !important;
+    }
+    &--large {
+      font-size: 1.2em !important;
+    }
+    &--x-large {
+      font-size: 1.4em !important;
+    }
+    &--xx-large {
+      font-size: 1.6em !important;
+    }
+    &--xxx-large {
+      font-size: 1.8em !important;
+    }
+    &--huge {
+      font-size: 2em !important;
+    }
+    &--x-huge {
+      font-size: 2.2em !important;
+    }
+    &--xx-huge {
+      font-size: 2.4em !important;
+    }
+  }
+}

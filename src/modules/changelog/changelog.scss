@@ -1,0 +1,50 @@
+@import 'materialize-css';
+
+.ChangeLog {
+  &__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+  }
+  &__icon {
+    &--back-end {
+      @extend .deep-purple-text, .text-darken-4;
+    }
+    &--front-end {
+      @extend .green-text, .text-darken-2;
+    }
+    &--server {
+      @extend .red-text, .text-darken-3;
+    }
+    &--ci-cd {
+      @extend .orange-text, .text-darken-4;
+    }
+    &--design {
+      @extend .blue-text;
+    }
+    &--documentation {
+      @extend .blue-grey-text;
+    }
+    &--change {
+      @extend .deep-orange-text;
+    }
+    &--improvement {
+      @extend .green-text;
+    }
+    &--bugfix {
+      @extend .red-text;
+    }
+    &--integration {
+      @extend .purple-text, .text-darken-4;
+    }
+  }
+  &__task-name {
+    flex-grow: 1;
+  }
+  &__user-name {
+    align-self: flex-end;
+  }
+  &__description {
+    padding: 15px !important;
+  }
+}

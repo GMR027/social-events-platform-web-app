@@ -1,0 +1,13 @@
+.Modal {
+  ol {
+    padding-left: 20px !important;
+  }
+  li {
+    list-style: decimal !important;
+  }
+  .Title {
+    &__text {
+      font-weight: normal;
+    }
+  }
+}

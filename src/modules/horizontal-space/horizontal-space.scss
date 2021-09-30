@@ -1,0 +1,24 @@
+.HorizontalSpace {
+  display: block;
+  width: 100%;
+
+  &--x-small {
+    height: 20px;
+  }
+
+  &--small {
+    height: 30px;
+  }
+
+  &--medium {
+    height: 50px;
+  }
+
+  &--large {
+    height: 70px;
+  }
+
+  &--x-large {
+    height: 90px;
+  }
+}

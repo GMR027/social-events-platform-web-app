@@ -1,0 +1,19 @@
+@import 'src/constants/Constants.scss';
+
+.Title {
+  &__text {
+    display: block;
+    font-size: $title-font-size-mobile;
+    line-height: 1.6em;
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 993px) {
+  .Title {
+    &__text {
+      font-weight: $slim-font-weight;
+      font-size: $title-font-size;
+    }
+  }  
+}

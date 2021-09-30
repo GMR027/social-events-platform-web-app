@@ -1,0 +1,35 @@
+@import 'materialize-css';
+@import 'src/constants/Constants.scss';
+
+.TextWithIcon {
+  margin-top: 10px;
+
+  &__item {
+    display: block;
+    border-radius: 5px;
+    padding: 10px 0;
+    transition: all 0.5s;
+    @extend .z-depth-1;
+  }
+
+  &__item:hover {
+    @extend .z-depth-3;
+  }
+
+  &__flex {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    justify-content: center;
+    padding: 0 10px;
+  }
+
+  i {
+    font-size: 1.5em;
+    margin-right: 8px;
+  }
+
+  span {
+    font-size: 1em;
+  }
+}
