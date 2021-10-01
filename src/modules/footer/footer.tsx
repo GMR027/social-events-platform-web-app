@@ -12,7 +12,7 @@ const Footer = (): React.ReactElement => {
   const system = useSelector((state: any) => state.system);
 
   return (
-    <footer className='page-footer cyan darken-2 Footer'>
+    <footer className='page-footer red darken-2 Footer'>
       <div className='footer-copyright Footer__copyright'>
         <div className='container Footer__info'>
           <div className='Footer__version'>

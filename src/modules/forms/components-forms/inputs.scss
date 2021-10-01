@@ -1,0 +1,15 @@
+@import 'materialize-css';
+
+.input-field:focus {
+  border-bottom: 1px solid red !important;
+  box-shadow: none !important;
+}
+
+.EventRegistration{
+  &__buttons {
+    text-align: center;
+  }
+  &__buttoncontainer {
+    padding: 5px;
+  }
+}

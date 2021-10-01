@@ -1,0 +1,57 @@
+@import 'materialize-css';
+@import 'src/constants/Constants.scss';
+
+.EventItem {
+  width: 100%;
+  margin-bottom: 20px;
+
+  &__card {
+    padding: 10px 10px 10px;
+    display: block;
+    width: 100%;
+    border-radius: 8px;
+    @extend .z-depth-1;
+    transition: all 0.5s;
+    position: relative;
+  }
+
+  &__card:hover {
+    @extend .z-depth-3;
+  }
+
+  &__img {
+    height: 250px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 8px;
+  }
+
+  &__square {
+    display: block;
+    height: 30px;
+    padding: 5px;
+    width: fit-content;
+    border-radius: 3px;
+    position: absolute;
+    top: 20px;
+    right: 10px;
+  }
+
+  &__title {
+    width: 100%;
+    font-size: $subtitle-title-cards;
+    margin-top: 8px;
+    text-align: center;
+  }
+
+  &__text {
+    text-align: center;
+  }
+
+  &__dateEvent {
+      text-align: center;
+      font-size: $small-text;
+  }
+}

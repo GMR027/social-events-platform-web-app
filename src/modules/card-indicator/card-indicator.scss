@@ -1,0 +1,25 @@
+.CardIndicator {
+    border-radius: 3px 0 0 3px;
+    padding: 0 3px;
+    width: fit-content;
+    position: absolute;
+    right: 10px;
+    top: 20px;
+  
+    &__indicator {
+      display: flex;
+      flex-direction: row;
+      flex-grow: 3;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    i {
+      font-size: 20px;
+      margin: 4px 4px !important;
+    }
+    &__text {
+      text-align: left;
+      font-size: 17px;
+    }
+  }

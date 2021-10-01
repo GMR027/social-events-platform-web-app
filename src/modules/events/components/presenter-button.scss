@@ -1,0 +1,24 @@
+@import 'materialize-css';
+
+.PresentButton {
+  margin-top: 1.5em;
+  &__image {
+    background-position: center;
+    background-size: cover;
+    height: 130px;
+    width: 130px;
+    border-radius: 65px;
+    transition: all 0.2s;
+    margin: 0 auto;
+    @extend .z-depth-1;
+  }
+
+  &__image:hover {
+    @extend .z-depth-4;
+  }
+
+  &__containerText {
+    margin-top: 1em;
+    text-align: center;
+  }
+}
