@@ -4,7 +4,7 @@ pipeline {
         skipStagesAfterUnstable()
     }
     environment {
-        APP_FOLDER = "social-event-platform-web-app"
+        APP_FOLDER = "social-events-platform-web-app"
         REACT_APP_PRODUCTION = "true"
         PUBLIC_URL = ""
         REACT_APP_API_URL = sh(script: "echo ${API_URL}", , returnStdout: true).trim()
