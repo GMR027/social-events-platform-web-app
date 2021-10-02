@@ -11,6 +11,7 @@ import Home from 'src/pages/home/home';
 import About from 'src/pages/about/about';
 import EnvironmentVariables from 'src/constants/EnvironmentVariables';
 import ChangeLogPage from 'src/pages/changelog/changelog';
+import EventDetailPage from 'src/pages/event-detail/event-detail';
 
 const env = EnvironmentVariables.getInstance();
 const isMobileApp = env.isMobileApp;
@@ -19,6 +20,11 @@ const Routes = (): React.ReactElement => {
   return (
     <Router forceRefresh={!isMobileApp}>
       <Switch>
+        <Route path='/evento/:eventId'>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><EventDetailPage /></PersistGate>
+          </Provider>
+        </Route>
         <Route path='/about'>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><About /></PersistGate>

@@ -14,6 +14,11 @@
 }
 
 .ParallaxHeaderImage {
+  &--xx-small {
+    height: 25vh;
+    background-size: auto calc(35vh + 100px);
+    @extend .ParallaxHeaderImageCommon;
+  }
   &--x-small {
     height: 30vh;
     background-size: auto calc(35vh + 100px);

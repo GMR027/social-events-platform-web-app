@@ -44,7 +44,7 @@ const commonIndex = (req, res) => {
 };
 
 app.get('/', commonIndex);
-app.get('/event/:eventId', commonIndex);
+app.get('/evento/:eventId', commonIndex);
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}!`);
