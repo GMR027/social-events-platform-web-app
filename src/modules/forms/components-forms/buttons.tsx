@@ -23,12 +23,3 @@ export const ButtonDownload = (props: any): React.ReactElement => {
   );
 };
 
-export const ButtonUpLoad = (props: any): React.ReactElement => {
-  return (
-    <a
-      className={`btn white-text Buttons ${props.colorbutton}`}>{props.text}
-      <input type='image' src='' alt=''/>
-    </a>
-  );
-};
-
