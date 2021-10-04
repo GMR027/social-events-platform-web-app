@@ -1,10 +1,9 @@
 import React from 'react';
-import 'src/modules/forms/components-forms/inputs.scss';
 
 export const ButtonLink = (props: any): React.ReactElement => {
   return (
     <a
-      className={`btn Buttons ${props.colorbutton}`}
+      className={`btn ${props.color}`}
       href={props.link}>{props.text}
     </a>
   );
@@ -14,7 +13,7 @@ export const ButtonLink = (props: any): React.ReactElement => {
 export const ButtonDownload = (props: any): React.ReactElement => {
   return (
     <a
-      className={`btn Buttons ${props.colorbutton}`}
+      className={`btn ${props.color}`}
       href={props.file}
       target='_blank'
       rel='noreferrer'
@@ -22,4 +21,3 @@ export const ButtonDownload = (props: any): React.ReactElement => {
     </a>
   );
 };
-

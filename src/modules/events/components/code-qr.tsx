@@ -18,7 +18,7 @@ const QRCodeComponent = ( props: any ): React.ReactElement => {
       <SubTitle text={props.title} />
       <div className='QrCodeComponent'>
         <QRCode
-          value={canonicalURL}
+          value={props.value ? props.value : canonicalURL}
           size={props.size}
           bgColor='#FFFFFF'
           fgColor={props.color} />

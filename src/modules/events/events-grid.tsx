@@ -1,21 +1,27 @@
 import React from 'react';
 import EventItem from 'src/modules/events/event-item';
 import 'src/modules/events/events.scss';
+import { ShortDateParser } from 'src/modules/utils/date-parser';
 
 const EventsGrid = (props: any): React.ReactElement => {
   return (
     <div className='StandGridItems'>
       <div className='row'>
       {
-        props.events.data.map((element: any, index: number) => {
+        props.events.data.map((event: any, index: number) => {
           return (
             <EventItem
               key={index}
               col='col s12 m4'
-              slug={element.attributes.slug}
-              imgPicture={element.attributes.img_picture}
-              title={element.attributes.title}
-              city={element.attributes.city}/>
+              slug={event.attributes.slug}
+              imgPicture={event.attributes.img_picture}
+              title={event.attributes.title}
+              dateEvent={`${
+                event.attributes.start_date ? ShortDateParser(event.attributes.start_date) : null
+              } al ${
+                event.attributes.end_date ? ShortDateParser(event.attributes.end_date) : null
+              }`}
+              city={event.attributes.city}/>
           );
         })
       }
