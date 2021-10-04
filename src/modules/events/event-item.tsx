@@ -21,7 +21,7 @@ const EventItem = (props: any): React.ReactElement => {
           <div className='grey-text text-darken-4 truncate EventItem__title'>
             {props.title}
           </div>
-          <div className='EventItem__dateEvent grey-text text-darken-1'>Fecha de evento: {props.dateEvent}</div>
+          <div className='EventItem__dateEvent grey-text text-darken-1'>{props.dateEvent}</div>
           <div className='EventItem__text red-text text-darken-2'>Ir al evento</div>
         </div>
       </div>

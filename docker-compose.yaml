@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  social-events-web-app:
+    image: longmont.iguzman.com.mx:5000/social-events-web-app:1.0
+    volumes:
+      - /social-events-web-app/staging/static:/static
+      - /social-events-web-app/staging/assets:/assets
+    ports:
+      - "4035:3000"

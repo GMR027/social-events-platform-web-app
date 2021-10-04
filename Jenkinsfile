@@ -4,51 +4,51 @@ pipeline {
         skipStagesAfterUnstable()
     }
     environment {
-        APP_FOLDER = "social-events-platform-web-app"
-        REACT_APP_PRODUCTION = "true"
-        PUBLIC_URL = ""
+        APP_FOLDER = "social-events-web-app"
         REACT_APP_API_URL = sh(script: "echo ${API_URL}", , returnStdout: true).trim()
         REACT_APP_BRANCH_NAME = sh(script: "echo ${branchName}", , returnStdout: true).trim()
-        ENV = sh(script: "echo ${ENV}", , returnStdout: true).trim()
-        BUILD_MOBILE_APP = sh(script: "echo ${BUILD_MOBILE_APP}", , returnStdout: true).trim()
         REACT_APP_FACEBOOK_APP_ID = sh(script: "echo ${facebookAppID}", , returnStdout: true).trim()
+        ENVT = sh(script: "echo ${ENV}", , returnStdout: true).trim()
+        BUILD_MOBILE_APP = sh(script: "echo ${BUILD_MOBILE_APP}", , returnStdout: true).trim()
     }
     stages {
         stage("Check App folders") {
             steps {
-                sh "sudo mkdir /var/www/apps -p"
-                sh "sudo chmod -R 777 /var/www/apps"
-                sh "sudo mkdir /var/www/apps/$ENV -p"
-                sh "sudo chmod -R 777 /var/www/apps/$ENV"
+                sh "sudo mkdir /$APP_FOLDER -p"
+                sh "sudo chmod -R 777 /$APP_FOLDER"
+                sh "sudo mkdir /$APP_FOLDER/$ENVT -p"
+                sh "sudo chmod -R 777 /$APP_FOLDER/$ENVT"
+
+                sh "sudo mkdir /$APP_FOLDER/$ENVT/static -p"
+                sh "sudo chmod -R 777 /$APP_FOLDER/$ENVT/static"
+
+                sh "sudo mkdir /$APP_FOLDER/$ENVT/assets -p"
+                sh "sudo chmod -R 777 /$APP_FOLDER/$ENVT/assets"
             }
         }
-        stage("Install dependencies & build Web App") {
+        stage("Build statics") {
             steps {
                 sh "npm i"
                 sh "npm run build"
+                sh "cp -r build/static /$APP_FOLDER/$ENVT"
+                sh "cp -r build/assets /$APP_FOLDER/$ENVT"
             }
         }
-        stage("Deploy") {
+        stage("Build & push docker image") {
             steps {
-                sh "rm -rf /var/www/apps/$ENV/$APP_FOLDER"
-                sh "mkdir /var/www/apps/$ENV/$APP_FOLDER"
-                sh "cp -r build server deploy /var/www/apps/$ENV/$APP_FOLDER"
-                sh "cp package.json /var/www/apps/$ENV/$APP_FOLDER"
+                sh "sudo docker build --build-arg REACT_APP_API_URL=$REACT_APP_API_URL -t $APP_FOLDER ."
+                sh "sudo docker tag $APP_FOLDER longmont.iguzman.com.mx:5000/$APP_FOLDER:1.0"
+                sh "sudo docker push longmont.iguzman.com.mx:5000/$APP_FOLDER:1.0"
             }
         }
-        stage("Install production dependencies") {
+        stage("Stop current instance") {
             steps {
-                dir("/var/www/apps/$ENV/$APP_FOLDER") {
-                    sh "npm i --production"
-                    sh "npm run prepare-index"
-                }
+                sh "sudo docker-compose -f docker-compose.yaml down"
             }
         }
-        stage("Restart Supervisor") {
+        stage("Start instance") {
             steps {
-                sh "sudo supervisorctl reread"
-                sh "sudo supervisorctl update"
-                sh "sudo supervisorctl restart $APP_FOLDER-$ENV"
+                sh "sudo docker-compose -f docker-compose.yaml up -d"
             }
         }
         stage("Build Mobile App") {
@@ -56,10 +56,10 @@ pipeline {
                 expression { BUILD_MOBILE_APP == "yes" }
             }
             environment {
-                REACT_APP_PRODUCTION = ""
                 REACT_APP_IS_MOBILE_APP = "true"
             }
             steps {
+                sh "npm i"
                 sh "npm run build"
             }
         }

@@ -9,7 +9,16 @@ export const DateParser = (date: string): string => {
   const day = parsedDate.getUTCDate();
   const year = parsedDate.getFullYear();
 
-  return `${month} ${day}, ${year}`;
+  return `${day} de ${month} de ${year}`;
+};
+
+export const ShortDateParser = (date: string): string => {
+  const parsedDate = new Date(date);
+  const month = parsedDate.getMonth() + 1;
+  const day = parsedDate.getUTCDate();
+  const year = parsedDate.getFullYear();
+
+  return `${day}/${month}/${year}`;
 };
 
 export const HourParser = (date: string): string => {

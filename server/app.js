@@ -6,7 +6,7 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 // const fetchData = require('./fetch-data');
 
-const port = process.env.NODEJS_PORT;
+const port = 3000;
 const app = express();
 const pwd = __dirname.split(path.sep);
 pwd.pop();
@@ -48,5 +48,6 @@ app.get('/evento/:eventId', commonIndex);
 app.get('/badge/:badgetId', commonIndex);
 
 app.listen(port, () => {
+  console.log(`API URL: ${process.env.REACT_APP_API_URL}`);
   console.log(`App listening on port ${port}!`);
 });
