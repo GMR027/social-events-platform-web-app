@@ -19,7 +19,7 @@ const QRCodeComponent = ( props: any ): React.ReactElement => {
       <div className='QrCodeComponent'>
         <QRCode
           value={canonicalURL}
-          size={200}
+          size={props.size}
           bgColor='#FFFFFF'
           fgColor={props.color} />
         </div>

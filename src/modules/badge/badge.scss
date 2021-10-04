@@ -1,0 +1,39 @@
+@import 'materialize-css';
+@import 'src/constants/Constants.scss';
+
+@media screen and (min-width: 100px) {
+  .Badge {
+    &__image {
+      margin: auto;
+      position: relative;
+      background-position: center;
+      background-size: cover;
+      height: 600px;
+      width: 400px;
+    }
+    &__imageProfile {
+      position: absolute;
+      right: 30px;
+      top: 30px;
+      justify-content: flex-end;
+      width: 150px;
+      height: 150px;
+      border-radius: 75px;
+      border: solid 5px white;
+      background-size: cover;
+      background-position: center;
+    }
+
+    &__name {
+      position: relative;
+      top: 230px;
+      text-align: center;
+      font-size: $title-font-size-mobile;
+    }
+
+    &__qr {
+      position: relative;
+      top: 230px;
+    }
+  }
+}
