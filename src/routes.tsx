@@ -12,6 +12,7 @@ import About from 'src/pages/about/about';
 import EnvironmentVariables from 'src/constants/EnvironmentVariables';
 import ChangeLogPage from 'src/pages/changelog/changelog';
 import EventDetailPage from 'src/pages/event-detail/event-detail';
+import BadgePage from 'src/pages/badge/badge-page';
 
 const env = EnvironmentVariables.getInstance();
 const isMobileApp = env.isMobileApp;
@@ -20,6 +21,11 @@ const Routes = (): React.ReactElement => {
   return (
     <Router forceRefresh={!isMobileApp}>
       <Switch>
+        <Route path='/badge/:badgetId'>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}><BadgePage /></PersistGate>
+          </Provider>
+        </Route>
         <Route path='/evento/:eventId'>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><EventDetailPage /></PersistGate>
