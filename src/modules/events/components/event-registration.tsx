@@ -128,19 +128,19 @@ const EventRegistration = (props: any): React.ReactElement => {
   return (
     <div className='EventRegistration'>
       <HorizontalSpace size='small' />
-      <div className='container'>
-        <div className='col s1 hide-on-small-only'></div>
-        <div className='col s1 hide-on-small-only'></div>
-      </div>
-      <div className='container'>
-        <div className='col s1 hide-on-small-only'></div>
+      <div className='row'>
+        <div className='col s2 hide-on-small-only'></div>
         <EventGetBadgeForm
           formRef={badgeFormRef}
           isLoading={isLoading}
           eventId={props.eventId}
           eventName={props.eventName}
           getBadgeAPICall={getBadgeAPICall} />
-        <HorizontalSpace size='small' />
+        <div className='col s2 hide-on-small-only'></div>
+      </div>
+      <HorizontalSpace size='small' />
+      <div className='row'>
+        <div className='col s2 hide-on-small-only'></div>
         <EventRegistrationForm
           formRef={regFormRef}
           isLoading={isLoading}
@@ -148,7 +148,7 @@ const EventRegistration = (props: any): React.ReactElement => {
           eventName={props.eventName}
           responsiveLetter={props.responsiveLetter}
           registerUserAPICall={registerUserAPICall} />
-        <div className='col s1 hide-on-small-only'></div>
+        <div className='col s2 hide-on-small-only'></div>
       </div>
       <Modal
         setModal={setModal}

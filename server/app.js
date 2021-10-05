@@ -46,6 +46,8 @@ const commonIndex = (req, res) => {
 app.get('/', commonIndex);
 app.get('/evento/:eventId', commonIndex);
 app.get('/badge/:badgetId', commonIndex);
+app.get('/badge/:badgetId/check-in', commonIndex);
+app.get('/events', commonIndex);
 
 app.listen(port, () => {
   console.log(`API URL: ${process.env.REACT_APP_API_URL}`);

@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
-import {
-  CommonInput
-} from 'src/modules/forms/inputs';
+import { CommonInput } from 'src/modules/forms/inputs';
 import SubTitle from 'src/modules/sub-title/sub-title';
 
 const EventGetBadgeForm = (props: any): React.ReactElement => {
   const [email, setEmail] = useState(null);
 
   return (
-    <form className='col s12 m10' ref={props.formRef}>
+    <form className='col s12 m8' ref={props.formRef}>
       <SubTitle text='Ya esta registrado? '/>
       <p className='EventRegistration__text-instrucctions grey-text text-darken-3'>
         Si usted ya esta registrado a este evento y requiere acceder a su gafete virual,
