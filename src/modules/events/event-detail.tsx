@@ -36,6 +36,9 @@ const eventDetailData = {
   relationships: {
     pictures: {
       data: []
+    },
+    agenda_items: {
+      data: []
     }
   }
 };
