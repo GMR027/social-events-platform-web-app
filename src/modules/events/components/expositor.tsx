@@ -4,8 +4,7 @@ import 'src/modules/events/components/expositor.scss';
 
 const Expositor = (props: any): React.ReactElement => {
   return (
-    <Link
-      to={props.link || '#'}>
+    <Link to={`//${props.link}`}>
       <div className={`Expositor ${props.size}`}>
         <div
           style={{backgroundImage: `url(${props.image})`}}

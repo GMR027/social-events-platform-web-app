@@ -17,6 +17,7 @@ import fetchData from 'src/modules/utils/fetch-data';
 import ImageSimple from 'src/modules/events/components/image-simple';
 import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import SubTitle from 'src/modules/sub-title/sub-title';
+import EventAgenda from 'src/modules/events/components/event-agenda';
 import { DateParser } from 'src/modules/utils/date-parser';
 
 const eventDetailData = {
@@ -114,7 +115,9 @@ const EventDetail = (): React.ReactElement => {
             eventName={event.attributes.title} />
           <HorizontalSpace size='x-small'/>
         </div>
-        <div id='test3' className='col s12'>Agenda</div>
+        <div id='test3' className='col s12'>
+          <EventAgenda event={event}/>
+        </div>
         <div id='test4' className='col s12'>
           <HorizontalSpace size='small'/>
           <SubTitle text={`Mapa del evento ${event.attributes.title}`} />

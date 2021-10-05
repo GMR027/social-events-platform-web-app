@@ -20,7 +20,7 @@ const EventRegistrationForm = (props: any): React.ReactElement => {
   const [imgUser, setImgUser] = useState('');
 
   return (
-    <form className='col s12 m10' ref={props.formRef}>
+    <form className='col s12 m8' ref={props.formRef}>
       <SubTitle text='Nuevo registro al evento'/>
       <p className='EventRegistration__text-instrucctions grey-text text-darken-3'>
         Por favor complete el siguiente formulario para registrarse al evento de {props.eventName}.

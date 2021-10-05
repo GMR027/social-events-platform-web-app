@@ -68,6 +68,7 @@
   .StandPictures .Swiper {  
     &__content {
       height: 60vh;
+      min-height: 650px;
     }
   }
 }
