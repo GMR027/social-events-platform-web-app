@@ -12,11 +12,11 @@ import { useDispatch } from 'react-redux';
 
 const logoFile = '/assets/logo.png';
 
-const NavBar = (): React.ReactElement => {
+const NavBar = ( props: any ): React.ReactElement => {
   const dispatch = useDispatch();
   const system = useSelector((state: any) => state.system);
   const prefix = system.platform.prefix;
-  const logoURL = `${prefix}${logoFile}`;
+  const logoURL = props.logo ? props.logo : `${prefix}${logoFile}`;
   const sideNavRef: any = useRef(null);
 
   const closeSideNav = () => {
@@ -35,7 +35,7 @@ const NavBar = (): React.ReactElement => {
         <nav className='white black-text'>
           <div className='nav-wrapper container'>
             <Link
-              to='/'
+              to={props.logoURL ? props.logoURL : '/'}
               className='brand-logo Logo'
               style={{
                 backgroundImage: `url(${logoURL})`

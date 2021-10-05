@@ -1,10 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import 'src/modules/events/components/expositor.scss';
 
 const Expositor = (props: any): React.ReactElement => {
   return (
-    <Link to={`//${props.link}`}>
+    <a href={props.link} target='_blank' rel='noreferrer'>
       <div className={`Expositor ${props.size}`}>
         <div
           style={{backgroundImage: `url(${props.image})`}}
@@ -15,7 +14,7 @@ const Expositor = (props: any): React.ReactElement => {
           <div className={`Expositor__accesText ${props.colorAccess}`}>{props.textAccess}</div>
         </div>
       </div>
-    </Link>
+    </a>
   );
 };
 

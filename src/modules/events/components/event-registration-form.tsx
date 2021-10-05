@@ -23,7 +23,7 @@ const EventRegistrationForm = (props: any): React.ReactElement => {
     <form className='col s12 m8' ref={props.formRef}>
       <SubTitle text='Nuevo registro al evento'/>
       <p className='EventRegistration__text-instrucctions grey-text text-darken-3'>
-        Por favor complete el siguiente formulario para registrarse al evento de {props.eventName}.
+        Por favor complete el siguiente formulario para registrarse a {props.eventName}.
         Todos los campos marcados con un * al final son obligatorios.
       </p>
       <CommonInput textInput='Nombre(s) *' type='text' id='first_name' onChange={(e: any) => {
@@ -49,7 +49,7 @@ const EventRegistrationForm = (props: any): React.ReactElement => {
       }} placeholder='Ingrese respuesta' maxLength='10' disabled={props.isLoading} />
       <HorizontalSpace size='xx-small' />
       <p className='EventRegistration__text-instrucctions grey-text text-darken-3'>
-        Opcionalmente puede agregar una foto para su gafete del evento de {props.eventName}.
+        Opcionalmente puede agregar una foto para su gafete de {props.eventName}.
       </p>
       <InputImgFile
         src={imgUser}

@@ -43,7 +43,7 @@ const eventDetailData = {
   }
 };
 
-const EventDetail = (): React.ReactElement => {
+const EventDetail = (props: any): React.ReactElement => {
   const tabsComponentRef: any = useRef(null);
   const history = useHistory();
   const params: any = useParams();
@@ -62,6 +62,8 @@ const EventDetail = (): React.ReactElement => {
         const eventDetailData = response.data[0];
         if (!eventDetailData) return history.replace('/');
         setDetail(eventDetailData);
+        props.setLogo(eventDetailData.attributes.img_logo);
+        props.setLogoURL(`/evento/${eventDetailData.attributes.slug}`);
         setExpositors(response.included.filter((e: any) => e.type === 'Expositor'));
       }
     })
@@ -73,7 +75,7 @@ const EventDetail = (): React.ReactElement => {
   return (
     <div>
       <ParallaxHeaderImage
-        size='small'
+        size='medium'
         image={event.attributes.img_cover}
         title={event.attributes.title}
         location={`${event.attributes.city} - del ${
@@ -83,13 +85,13 @@ const EventDetail = (): React.ReactElement => {
         }`} />
       <div className='container'>
         <ul className='tabs Stand__tabs' ref={tabsComponentRef}>
-          <li className='tab col s3'><a href='#test1' className='active'>Inicio</a></li>
-          <li className='tab col s3'><a href='#test2'>Registro</a></li>
-          <li className='tab col s3'><a href='#test3'>Agenda</a></li>
-          <li className='tab col s3'><a href='#test4'>Mapa</a></li>
-          <li className='tab col s3'><a href='#test5'>Galería</a></li>
+          <li className='tab col s3'><a href='#inicio' className='active'>Inicio</a></li>
+          <li className='tab col s3'><a href='#registro'>Registro</a></li>
+          <li className='tab col s3'><a href='#agenda'>Agenda</a></li>
+          <li className='tab col s3'><a href='#mapa'>Mapa</a></li>
+          <li className='tab col s3'><a href='#galeria'>Galería</a></li>
         </ul>
-        <div id='test1' className='col s12 row'>
+        <div id='inicio' className='col s12 row'>
           <CommonLargeText text={event.attributes.description} />
           <HorizontalSpace size='small'/>
           <SubTitle text='Presentadores'/>
@@ -99,7 +101,7 @@ const EventDetail = (): React.ReactElement => {
               return (
                 <Expositor
                   key={index}
-                  size='col s12 m3'
+                  size='col s6 m3'
                   image={e.attributes.img_picture}
                   text={e.attributes.title}
                   link={e.attributes.link}
@@ -111,25 +113,25 @@ const EventDetail = (): React.ReactElement => {
           </div>
           <HorizontalSpace size='x-small'/>
         </div>
-        <div id='test2' className='col s12'>
+        <div id='registro' className='col s12'>
           <EventRegistration
             responsiveLetter={event.attributes.responsive_letter}
             eventId={event.id}
             eventName={event.attributes.title} />
           <HorizontalSpace size='x-small'/>
         </div>
-        <div id='test3' className='col s12'>
-          <EventAgenda event={event}/>
+        <div id='agenda' className='col s12'>
+          <EventAgenda event={event} expositors={expositors} />
         </div>
-        <div id='test4' className='col s12'>
+        <div id='mapa' className='col s12'>
           <HorizontalSpace size='small'/>
-          <SubTitle text={`Mapa del evento ${event.attributes.title}`} />
+          <SubTitle text={`Mapa de ${event.attributes.title}`} />
           <ImageSimple imageSimple={event.attributes.map}/>
           <HorizontalSpace size='x-small'/>
         </div>
-        <div id='test5' className='col s12'>
+        <div id='galeria' className='col s12'>
           <HorizontalSpace size='small'/>
-          <SubTitle text={`Galeria del evento ${event.attributes.title}`} />
+          <SubTitle text={`Galeria de ${event.attributes.title}`} />
           <GalleryPictures images={event.relationships.pictures.data} />
           <HorizontalSpace size='x-small'/>
         </div>

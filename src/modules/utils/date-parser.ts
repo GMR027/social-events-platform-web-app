@@ -1,10 +1,14 @@
+const months = [
+  'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio',
+  'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+];
+const shortMonths = [
+  'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul',
+  'Ago', 'Sep', 'Oct', 'Nov', 'Dic'
+];
+
 export const DateParser = (date: string): string => {
   const parsedDate = new Date(date);
-  const months = [
-    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio',
-    'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-  ];
-
   const month = months[parsedDate.getMonth()];
   const day = parsedDate.getUTCDate();
   const year = parsedDate.getFullYear();
@@ -21,12 +25,32 @@ export const ShortDateParser = (date: string): string => {
   return `${day}/${month}/${year}`;
 };
 
+export const DayMonthParser = (date: string): string => {
+  const parsedDate = new Date(date);
+  const month = shortMonths[parsedDate.getMonth()];
+  const day = parsedDate.getUTCDate();
+
+  return `${month} ${day}`;
+};
+
 export const HourParser = (date: string): string => {
   const parsedDate = new Date(date);
   const hour = parsedDate.getHours();
   const minutes = parsedDate.getMinutes();
 
   return `${hour}:${minutes} hrs`;
+};
+
+export const TimeParser = (time: string): string => {
+  const timeArray = time.split(':');
+  let hour = Number(timeArray[0]);
+  let dayR = 'am';
+  if (hour > 12) {
+    hour -= 11;
+    dayR = 'pm';
+  }
+  const minutes = timeArray[1];
+  return `${hour}:${minutes}${dayR}`;
 };
 
 export const ArrayErrorsToHTMLList = ( errors: Array<any> ): string => {
