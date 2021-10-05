@@ -1,3 +1,46 @@
-.EventAgenda {
+@import 'materialize-css';
 
+$height-icon: 46px;
+
+.EventAgenda {
+  &__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    padding: 10px !important;
+  }
+  &__expositor-icon {
+    width: $height-icon !important;
+    height: $height-icon;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 32px;
+  }
+  &__name {
+    flex-grow: 1;
+    height: $height-icon;
+  }
+  &__date-time {
+    display: flex;
+    align-self: flex-end;
+    flex-direction: column;
+
+    div {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+    }
+
+    i {
+      margin-right: 0 !important;
+    }
+  }
+  &__attribute {
+    display: block;
+    width: 100%;
+  }
+  &__description {
+    padding: 15px !important;
+  }
 }
