@@ -7,7 +7,7 @@ import 'src/modules/card-indicator/card-indicator.scss';
 const EventItem = (props: any): React.ReactElement => {
   return (
     <Link
-      to={`/evento/${props.slug}`}>
+      to={`/${props.slug}`}>
       <div className={`EventItem ${props.col}`}>
         <div className='EventItem__card'>
           <div

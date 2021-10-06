@@ -79,15 +79,15 @@ pipeline {
                 sh "cp android/logo.png app/"
                 sh "cp android/splash.png app/"
                 sh "tar -cvf app.tar app/"
-                sh "cp app.tar /var/www/apps/$ENV/$APP_FOLDER/build/static/"
+                sh "cp app.tar /$APP_FOLDER/$ENVT/static"
                 dir("app") {
                     sh "cordova platform add android"
                     sh "cordova plugin add cordova-plugin-device"
                     sh "cordova plugin add cordova-plugin-splashscreen"
                     sh "cordova build android"
                 }
-                sh "cp app/platforms/android/app/build/outputs/apk/debug/app-debug.apk /var/www/apps/$ENV/$APP_FOLDER/build/static/app.apk"
-                sh "chmod 777 /var/www/apps/$ENV/$APP_FOLDER/build/static/app.apk"
+                sh "cp app/platforms/android/app/build/outputs/apk/debug/app-debug.apk /$APP_FOLDER/$ENVT/static/app.apk"
+                sh "chmod 777 /$APP_FOLDER/$ENVT/static/app.apk"
             }
         }
     }

@@ -1,0 +1,21 @@
+@import 'materialize-css';
+@import 'src/constants/Constants.scss';
+
+.CheckIn {
+  &__image-profile {
+    margin: 0 auto;
+    width: 150px;
+    height: 150px;
+    border-radius: 75px;
+    border: solid 5px white;
+    background-size: cover;
+    background-position: center;
+  }
+
+  &__name {
+    width: 100%;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: $medium-font-weight;
+  }
+}

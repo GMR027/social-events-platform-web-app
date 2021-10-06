@@ -5,7 +5,7 @@ $icon-size: 28px;
 
 .Logo {
   display: block;
-  width: 200px;
+  width: 100%;
   height: calc(100% - 10px);
   margin-top: 5px;
   background-position: center;
@@ -48,6 +48,7 @@ $icon-size: 28px;
 
 @media screen and (min-width: 993px) {
   .Logo {
+    width: 200px;
     background-position: center left;
   }
 

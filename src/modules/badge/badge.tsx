@@ -59,13 +59,13 @@ const Badge = (props: any): React.ReactElement => {
       <div
         className={`Badge__image ${props.className}`}
         style={{backgroundImage: `url(${badge.relationships.event.data.attributes.img_badge})`}}>
-          <div
-            className='Badge__imageProfile'
-            style={{backgroundImage: `url(${badge.attributes.img_user})`}}></div>
-          <div className='Badge__name'>{badge.attributes.first_name} {badge.attributes.last_name}</div>
-          <div className='Badge__qr'>
-            <QRCodeComponent value={`${canonicalURL}/check-in`} />
-          </div>
+        <div
+          className='Badge__imageProfile'
+          style={{backgroundImage: `url(${badge.attributes.img_user})`}}></div>
+        <div className='Badge__name'>{badge.attributes.first_name} {badge.attributes.last_name}</div>
+        <div className='Badge__qr'>
+          <QRCodeComponent value={`${canonicalURL}/check-in`} />
+        </div>
       </div>
     </div>
   );

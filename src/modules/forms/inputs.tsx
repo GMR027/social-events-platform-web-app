@@ -24,7 +24,7 @@ export const InputImgFile = (props: any): React.ReactElement => {
     <div className='file-field input-field'>
       <div className={`btn ${props.color} ${props.className}`}>
         <span>{props.name}</span>
-        <input type='file'
+        <input type='file' accept="image/*"
           className={props.validate ? 'validate' : ''}
           src={props.src} name='img_covid_test_result'
           disabled={props.disabled}
