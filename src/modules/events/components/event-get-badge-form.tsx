@@ -13,7 +13,7 @@ const EventGetBadgeForm = (props: any): React.ReactElement => {
         por favor ingrese su correo electronico y le enviaremos un correo con el enlace
         para que pueda acceder a su gafete en todo momento, gracias!
       </p>
-      <CommonInput textInput='Correo eléctronico *' type='email' id='email' onChange={(e: any) => {
+      <CommonInput textInput='Correo eléctronico *' type='email' id='recovery-email' onChange={(e: any) => {
         setEmail(e.target.value);
       }} placeholder='Ingrese respuesta' validate={true} disabled={props.isLoading} />
       <CommonInput inputAlign='center' id='submit' type='submit' onClick={(e: any) => {

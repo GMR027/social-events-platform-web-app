@@ -9,15 +9,12 @@ export const ButtonLink = (props: any): React.ReactElement => {
   );
 };
 
-
 export const ButtonDownload = (props: any): React.ReactElement => {
+  const link = `/media${props.file.split('/media')[1]}`;
   return (
     <a
       className={`btn ${props.color}`}
-      href={props.file}
-      target='_blank'
-      rel='noreferrer'
-      download>{props.text}
-    </a>
+      href={link}
+      download>{props.text}</a>
   );
 };

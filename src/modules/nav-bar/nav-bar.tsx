@@ -3,20 +3,15 @@ import React, {
 } from 'react';
 import { Link } from 'react-router-dom';
 import * as M from 'materialize-css';
-import { useSelector } from 'react-redux';
 import 'src/modules/nav-bar/nav-bar.scss';
 import SideMenu from 'src/modules/nav-bar/side-menu';
 import MenuItems from 'src/modules/nav-bar/menu-items';
 import { SetUserData } from 'src/redux/actions/user-actions';
 import { useDispatch } from 'react-redux';
 
-const logoFile = '/assets/logo.png';
 
 const NavBar = ( props: any ): React.ReactElement => {
   const dispatch = useDispatch();
-  const system = useSelector((state: any) => state.system);
-  const prefix = system.platform.prefix;
-  const logoURL = props.logo ? props.logo : `${prefix}${logoFile}`;
   const sideNavRef: any = useRef(null);
 
   const closeSideNav = () => {
@@ -38,7 +33,7 @@ const NavBar = ( props: any ): React.ReactElement => {
               to={props.logoURL ? props.logoURL : '/'}
               className='brand-logo Logo'
               style={{
-                backgroundImage: `url(${logoURL})`
+                backgroundImage: `url(${props.logo})`
               }}>
             </Link>
             <a href='#'
@@ -56,7 +51,7 @@ const NavBar = ( props: any ): React.ReactElement => {
         sideNavRef={sideNavRef}
         closeSideNav={closeSideNav}
         logout={logout}
-        logo={logoURL} />
+        logo={props.logo} />
     </>
   );
 };

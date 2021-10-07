@@ -59,8 +59,10 @@ const EventRegistrationForm = (props: any): React.ReactElement => {
         disabled={props.isLoading} />
       <HorizontalSpace size='xx-small' />
       <p className='EventRegistration__text-instrucctions grey-text text-darken-3'>
-        Para continuar con el registro al evento, por favor adjunte
-        su prueba de COVID y la carta responsiva firmada.
+        Si usted tiene su prueba de COVID y/o carta responsiva firmada,
+        por favor adjunte una foto de esos documentos.
+        Si necesita una copia de la carta responsiva, por favor de clic
+        en el boton de abajo, gracias.
       </p>
       <ButtonDownload
         color='red'
@@ -69,30 +71,36 @@ const EventRegistrationForm = (props: any): React.ReactElement => {
       <InputImgFile
         src={covidTestResultImage}
         setImage={setCovidTestResultImage}
-        name='Prueba de COVID *'
+        name='Adjuntar prueba de COVID'
         color='blue' validate={true} disabled={props.isLoading} />
       <InputImgFile
         src={signedResponsiveLetter}
         setImage={setSignedResponsiveLetter}
-        name='Carta responsiva *'
+        name='Adjuntar carta responsiva'
         color='blue' validate={true} disabled={props.isLoading} />
       <HorizontalSpace size='xx-small' />
       <CommonInput inputAlign='center' id='submit' type='submit' onClick={(e: any) => {
           e.preventDefault();
-          const data = {
+          const data: any = {
             data: {
               type: 'EventUserRegistration',
               attributes: {
                 first_name: firstName, last_name: lastName,
                 city: city, zone: zone, email: email,
-                phone: phone, emergency_phone: emergencyPhone,
-                img_covid_test_result: covidTestResultImage,
-                img_signed_responsive_letter: signedResponsiveLetter,
-                img_user: imgUser
+                phone: phone, emergency_phone: emergencyPhone
               },
               relationships: {event: {data: {type: 'Event', id: props.eventId}}}
             }
           };
+          if ( covidTestResultImage ) {
+            data.data.attributes.img_covid_test_result = covidTestResultImage;
+          }
+          if ( signedResponsiveLetter ) {
+            data.data.attributes.img_signed_responsive_letter = signedResponsiveLetter;
+          }
+          if ( imgUser ) {
+            data.data.attributes.img_user = imgUser;
+          }
           props.registerUserAPICall(data);
         }} value='Registrarme al evento' className='btn' disabled={props.isLoading} />
     </form>

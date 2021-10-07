@@ -81,8 +81,7 @@ const EventRegistration = (props: any): React.ReactElement => {
   const registerUserAPICall = (data: any) => {
     const attr = data.data.attributes;
     if ( !attr.first_name || !attr.last_name || !attr.city ||
-          !attr.email || !attr.phone || !attr.img_covid_test_result ||
-          !attr.img_signed_responsive_letter ) {
+          !attr.email || !attr.phone ) {
       setModalSuccess(false);
       setModalTitle('Error');
       setModaMessage('Por favor llene todos los campos requeridos marcados con * <br><br>Gracias.');

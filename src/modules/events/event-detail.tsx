@@ -47,7 +47,7 @@ const EventDetail = (props: any): React.ReactElement => {
   const tabsComponentRef: any = useRef(null);
   const history = useHistory();
   const params: any = useParams();
-  const [event, setDetail] = useState(eventDetailData);
+  const [event, setEvent] = useState(eventDetailData);
   const [expositors, setExpositors] = useState([]);
 
   useEffect(() => {
@@ -58,17 +58,18 @@ const EventDetail = (props: any): React.ReactElement => {
     .then((response: any) => {
       if (response.data.length === 0) {
         console.log('Error, evento no disponible');
-      } else {
-        const eventDetailData = response.data[0];
-        if (!eventDetailData) return history.replace('/');
-        setDetail(eventDetailData);
-        props.setLogo(eventDetailData.attributes.img_logo);
-        props.setLogoURL(`/evento/${eventDetailData.attributes.slug}`);
-        setExpositors(response.included.filter((e: any) => e.type === 'Expositor'));
+        return history.replace('/');
       }
+      const eventDetailData = response.data[0];
+      if (!eventDetailData) return history.replace('/');
+      setEvent(eventDetailData);
+      props.setLogo(eventDetailData.attributes.img_logo);
+      props.setLogoURL(`/${eventDetailData.attributes.slug}`);
+      setExpositors(response.included.filter((e: any) => e.type === 'Expositor'));
     })
     .catch((error) => {
       console.log('Hubo un error', error);
+      return history.replace('/');
     });
   }, [fetchData, M]);
 
