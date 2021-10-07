@@ -112,7 +112,7 @@ const CheckIn = (props: any): React.ReactElement => {
         setModalSuccess(true);
         setModalTitle('Check in exitoso!');
         setModaMessage(`${badge.attributes.first_name}, usted ha realizado check in exitosamente al evento <b>${event.attributes.title}</b>.<br/><br/>Gracias.`);
-        const newBadge = {...badgeData};
+        const newBadge = {...badge};
         newBadge.attributes.check_in_complete = true;
         setBadge(newBadge);
         modal.open();
