@@ -1,0 +1,14 @@
+@import 'materialize-css';
+
+
+.LinkIconImage {
+  margin: 4px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: 0.5s;
+  @extend .z-depth-1;
+}
+.LinkIconImage:hover {
+  @extend .z-depth-3;
+}

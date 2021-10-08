@@ -19,6 +19,8 @@ import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import SubTitle from 'src/modules/sub-title/sub-title';
 import EventAgenda from 'src/modules/events/components/event-agenda';
 import { DateParser } from 'src/modules/utils/date-parser';
+import CardVertical from 'src/modules/card-vertical/card-vertical';
+import { useSelector } from 'react-redux';
 
 const eventDetailData = {
   id: '',
@@ -31,7 +33,13 @@ const eventDetailData = {
     map: '',
     city: '',
     start_date: '',
-    end_date: ''
+    end_date: '',
+    video_live_link: '',
+    address: '',
+    facebook_link: '',
+    twitter_link: '',
+    instagram_link: '',
+    youtube_link: ''
   },
   relationships: {
     pictures: {
@@ -43,12 +51,17 @@ const eventDetailData = {
   }
 };
 
+const mapImage = '/assets/map_icon.png';
+
 const EventDetail = (props: any): React.ReactElement => {
+  const system = useSelector((state: any) => state.system);
+  const prefix = system.platform.prefix;
   const tabsComponentRef: any = useRef(null);
   const history = useHistory();
   const params: any = useParams();
   const [event, setEvent] = useState(eventDetailData);
   const [expositors, setExpositors] = useState([]);
+  const mapImageURL = `${prefix}${mapImage}`;
 
   useEffect(() => {
     M.Tabs.init(tabsComponentRef, {
@@ -79,7 +92,8 @@ const EventDetail = (props: any): React.ReactElement => {
         size='medium'
         image={event.attributes.img_cover}
         title={event.attributes.title}
-        location={`${event.attributes.city} - del ${
+        city={event.attributes.city}
+        location={`Del ${
           event.attributes.start_date ? DateParser(event.attributes.start_date) : null
         } al ${
           event.attributes.end_date ? DateParser(event.attributes.end_date) : null
@@ -93,8 +107,24 @@ const EventDetail = (props: any): React.ReactElement => {
           <li className='tab col s3'><a href='#galeria'>Galería</a></li>
         </ul>
         <div id='inicio' className='col s12 row'>
-          <CommonLargeText text={event.attributes.description} />
-          <HorizontalSpace size='small'/>
+          <div className="col s12 m9">
+            <CommonLargeText text={event.attributes.description} />
+          </div>
+          <div className='col s12 m3 container'>
+            <CardVertical
+              margin='2em 0 0'
+              borderRadius='8px'
+              padding='1em .5em .5em'
+              live={event.attributes.video_live_link}
+              mapImage={mapImageURL}
+              borderRadiusMapImage='35px'
+              mapAddress={event.attributes.address}
+              linkFacebook={event.attributes.facebook_link}
+              linkImstagram={event.attributes.instagram_link}
+              linktwitter={event.attributes.twitter_link}
+              linkYoutube={event.attributes.youtube_link} />
+              <HorizontalSpace size='large'/>
+          </div>
           <SubTitle text='Presentadores'/>
           <div className='row'>
           {
