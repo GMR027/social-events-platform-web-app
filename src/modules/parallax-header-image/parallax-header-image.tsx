@@ -9,6 +9,14 @@ const ParallaxHeaderImage = (props: any): React.ReactElement => {
         className={`ParallaxHeaderImage${props.size ? `--${props.size}` : ''}`}
         style={{backgroundImage: `url(${props.image})`}}>
         <div
+          className='IndicatorEventCity container'>
+            <div className='IndicatorEventCity__indicator red darken-2'>
+              <div className='IndicatorEventCity__textIcon white-text'>
+                <i className='material-icons left'>pin_drop</i>{props.city}
+              </div>
+            </div>
+          </div>
+        <div
           className='ParallaxHeaderImage__info'
           style={{
             backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, ${props.gradientOpacity ? props.gradientOpacity : '0.65'}), rgba(0, 0, 0, 0))`

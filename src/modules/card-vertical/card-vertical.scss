@@ -1,0 +1,39 @@
+@import 'materialize-css';
+
+.CardVertical {
+  @extend .z-depth-1;
+
+  &__live {
+    text-align: center;
+  }
+
+  &__liveText {
+    padding: 0.5em 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  i {
+    margin-right: 7px;
+  }
+
+  &__mapImage {
+    height: 70px;
+    width: 70px;
+    margin: 0 auto;
+    background-position: center;
+    background-size: cover;
+    transition: all 0.5s;
+    @extend .z-depth-1;
+  }
+
+  &__mapImage:hover {
+    @extend .z-depth-2;
+  }
+
+  &__mapTextLink {
+    display: block;
+    text-align: center;
+  }
+}
