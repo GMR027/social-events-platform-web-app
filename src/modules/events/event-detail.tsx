@@ -22,6 +22,7 @@ import { DateParser } from 'src/modules/utils/date-parser';
 import CardVertical from 'src/modules/card-vertical/card-vertical';
 import { useSelector } from 'react-redux';
 import innerSort from 'src/modules/utils/inner-sort';
+import GeneralInformationComponent from 'src/modules/general-information-tab/general-information-tab';
 
 const eventDetailData = {
   id: '',
@@ -41,7 +42,13 @@ const eventDetailData = {
     facebook_link: '',
     twitter_link: '',
     instagram_link: '',
-    youtube_link: ''
+    youtube_link: '',
+    img_rules: '',
+    rules: '',
+    img_dress_code: '',
+    dress_code: '',
+    img_travel_allowance: '',
+    travel_allowance: ''
   },
   relationships: {
     pictures: {
@@ -139,6 +146,9 @@ const EventDetail = (props: any): React.ReactElement => {
           <li className='tab col s3'><a href='#inicio' className='active'>Inicio</a></li>
           <li className='tab col s3'><a href='#registro'>Registro</a></li>
           <li className='tab col s3'><a href='#agenda'>Agenda</a></li>
+          <li className='tab col s3'><a href='#vestimenta'>Cód. de Vestimenta</a></li>
+          <li className='tab col s3'><a href='#viaticos'>Viáticos</a></li>
+          <li className='tab col s3'><a href='#normas'>Normas</a></li>
           <li className='tab col s3'><a href='#mapa'>Mapa</a></li>
           <li className='tab col s3'><a href='#galeria'>Galería</a></li>
         </ul>
@@ -162,16 +172,16 @@ const EventDetail = (props: any): React.ReactElement => {
               linkYoutube={event.attributes.youtube_link} />
             <HorizontalSpace size='large'/>
           </div>
-          <SubTitle text='Presentadores'/>
           <div className='row'>
-          {
-            expositors.map((e: any, index: number) => {
-              return (
-                <Expositor key={index} size='col s6 m3' image={e.attributes.img_picture}
-                  text={e.attributes.title} link={e.attributes.link} colorAccess='red-text text-darken-2' />
-              );
-            })
-          }
+            <SubTitle text='Presentadores'/>
+            {
+              expositors.map((e: any, index: number) => {
+                return (
+                  <Expositor key={index} size='col s6 m3' image={e.attributes.img_picture}
+                    text={e.attributes.title} link={e.attributes.link} colorAccess='red-text text-darken-2' />
+                );
+              })
+            }
           </div>
           <HorizontalSpace size='small'/>
         </div>
@@ -196,6 +206,27 @@ const EventDetail = (props: any): React.ReactElement => {
           <HorizontalSpace size='small'/>
           <SubTitle text={`Galeria de ${event.attributes.title}`} />
           <GalleryPictures images={event.relationships.pictures.data} />
+          <HorizontalSpace size='x-small'/>
+        </div>
+        <div id='vestimenta' className='col s12'>
+          <GeneralInformationComponent
+            title='Código de Vestimenta'
+            img={event.attributes.img_dress_code}
+            content={event.attributes.dress_code} />
+          <HorizontalSpace size='x-small'/>
+        </div>
+        <div id='viaticos' className='col s12'>
+          <GeneralInformationComponent
+            title='Solicitud de Viáticos'
+            img={event.attributes.img_travel_allowance}
+            content={event.attributes.travel_allowance} />
+          <HorizontalSpace size='x-small'/>
+        </div>
+        <div id='normas' className='col s12'>
+          <GeneralInformationComponent
+            title='Normas'
+            img={event.attributes.img_rules}
+            content={event.attributes.rules} />
           <HorizontalSpace size='x-small'/>
         </div>
       </div>
