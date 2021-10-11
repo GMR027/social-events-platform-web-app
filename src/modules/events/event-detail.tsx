@@ -19,8 +19,8 @@ import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import SubTitle from 'src/modules/sub-title/sub-title';
 import EventAgenda from 'src/modules/events/components/event-agenda';
 import { DateParser } from 'src/modules/utils/date-parser';
-import CardVertical from 'src/modules/card-vertical/card-vertical';
-import { useSelector } from 'react-redux';
+// import CardVertical from 'src/modules/card-vertical/card-vertical';
+// import { useSelector } from 'react-redux';
 import innerSort from 'src/modules/utils/inner-sort';
 import GeneralInformationComponent from 'src/modules/general-information-tab/general-information-tab';
 
@@ -63,7 +63,7 @@ const eventDetailData = {
     }
   }
 };
-const mapImage = '/assets/map_icon.png';
+// const mapImage = '/assets/map_icon.png';
 
 const rebuildZones = (zones: any) => {
   const dataZones: any = {};
@@ -93,14 +93,14 @@ const orderAgenda = (data: any) => {
 };
 
 const EventDetail = (props: any): React.ReactElement => {
-  const system = useSelector((state: any) => state.system);
-  const prefix = system.platform.prefix;
+  // const system = useSelector((state: any) => state.system);
+  // const prefix = system.platform.prefix;
   const tabsComponentRef: any = useRef(null);
   const history = useHistory();
   const params: any = useParams();
   const [event, setEvent] = useState(eventDetailData);
   const [expositors, setExpositors] = useState([]);
-  const mapImageURL = `${prefix}${mapImage}`;
+  // const mapImageURL = `${prefix}${mapImage}`;
 
   useEffect(() => {
     M.Tabs.init(tabsComponentRef, {
@@ -153,10 +153,26 @@ const EventDetail = (props: any): React.ReactElement => {
           <li className='tab col s3'><a href='#galeria'>Galería</a></li>
         </ul>
         <div id='inicio' className='col s12 row'>
-          <div className="col s12 m9">
+          <div className='col s12'>
+            <HorizontalSpace size='small'/>
             <CommonLargeText text={event.attributes.description} />
+            <HorizontalSpace size='large'/>
           </div>
-          <div className='col s12 m3 container'>
+          <SubTitle text='Presentadores'/>
+          <div className='row'>
+          {
+            expositors.map((e: any, index: number) => {
+              return (
+                <Expositor key={index} size='col s6 m3' image={e.attributes.img_picture}
+                  text={e.attributes.title} link={e.attributes.link} colorAccess='red-text text-darken-2' />
+              );
+            })
+          }
+          </div>
+          <div className='col s12'>
+            <HorizontalSpace size='x-small'/>
+          </div>
+          {/* <div className='col s12 m3 container'>
             <CardVertical
               margin='2em 0 0'
               borderRadius='8px'
@@ -171,19 +187,7 @@ const EventDetail = (props: any): React.ReactElement => {
               linktwitter={event.attributes.twitter_link}
               linkYoutube={event.attributes.youtube_link} />
             <HorizontalSpace size='large'/>
-          </div>
-          <div className='row'>
-            <SubTitle text='Presentadores'/>
-            {
-              expositors.map((e: any, index: number) => {
-                return (
-                  <Expositor key={index} size='col s6 m3' image={e.attributes.img_picture}
-                    text={e.attributes.title} link={e.attributes.link} colorAccess='red-text text-darken-2' />
-                );
-              })
-            }
-          </div>
-          <HorizontalSpace size='small'/>
+          </div> */}
         </div>
         <div id='registro' className='col s12'>
           <EventRegistration event={event}
