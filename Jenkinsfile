@@ -10,6 +10,7 @@ pipeline {
         REACT_APP_FACEBOOK_APP_ID = sh(script: "echo ${facebookAppID}", , returnStdout: true).trim()
         ENVT = sh(script: "echo ${ENV}", , returnStdout: true).trim()
         BUILD_MOBILE_APP = sh(script: "echo ${BUILD_MOBILE_APP}", , returnStdout: true).trim()
+        NODE_OPTIONS="--max-old-space-size=400"
     }
     stages {
         stage("Check App folders") {
