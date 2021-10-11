@@ -13,6 +13,7 @@ export const CommonInput = (props: any): React.ReactElement => {
         value={props.value}
         maxLength={props.maxLength}
         onClick={props.onClick}
+        ref={ props.reference ? props.reference : null }
         onChange={props.onChange} />
       <label htmlFor={props.id}>{props.textInput}</label>
     </div>

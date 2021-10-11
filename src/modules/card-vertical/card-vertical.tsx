@@ -3,6 +3,7 @@ import 'src/modules/card-vertical/card-vertical.scss';
 import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import LinkIconImage from 'src/modules/link-icon-image/link-icon-image';
 import { useSelector } from 'react-redux';
+// import { Link } from 'react-router-dom';
 
 const facebook = '/assets/facbook_icon.png';
 const imstagram = '/assets/imstagram_icon.png';
@@ -25,19 +26,14 @@ const CardVertical = (props: any): React.ReactElement => {
         padding: props.padding
       }}
       className={`CardVertical ${props.colorCard}`}>
-      <HorizontalSpace size='xx-small'/>
-      <div className='center-align'>
-        <a
-          href='/evento/farmacias-del-ahorro-2021#registro'
-          target='_blank'
-          rel='noreferrer'
-          className="red white-text btn pulse">Registrarme al evento</a>
-      </div>
-      <HorizontalSpace size='xx-small'/>
+      {/* <div className='center-align'>
+        <a href={`/${props.eventSlug}#registro`} className='red white-text btn'>Registrarme al evento</a>
+      </div> */}
+      {/* <HorizontalSpace size='xx-small'/> */}
       {
         props.live ?
           <div className='CardVertical__live'>
-            <div className="CardVerticalFlex">
+            <div className='CardVerticalFlex'>
               <a className='CardVertical__liveText red-text' href={props.live} target='_blank' rel='noreferrer' >
                 <i className='red-text material-icons'>ondemand_video</i>Video en vivo
               </a>
@@ -59,7 +55,7 @@ const CardVertical = (props: any): React.ReactElement => {
         <p className='center-align grey-text text-darken-2'>{props.mapAddress}</p>
       </a>
       <HorizontalSpace size='xx-small'/>
-      <div className="center-align">
+      <div className='center-align'>
       <LinkIconImage
         linkImage={facebookURL}
         borderRadiusMapImage='8px'

@@ -26,6 +26,7 @@ const EventRegistration = (props: any): React.ReactElement => {
   const [modalMessage, setModaMessage] = useState('');
   const [loadingModalTitle, setLoadingModalTitle] = useState('');
   const [loadingModalMessage, setLoadingModalMessage] = useState('');
+  const eventName = props.event.attributes.title;
 
   const onCloseEnd = () => {
     modal.close();
@@ -41,7 +42,7 @@ const EventRegistration = (props: any): React.ReactElement => {
     }
     setLoadingModalTitle('Buscando gafete');
     setLoadingModalMessage(`Un momento por favor, estamos buscando
-      su gafete virtual para el evento <b>${props.eventName}</b>.
+      su gafete virtual para el evento <b>${eventName}</b>.
       Por favor no actualize esta pantalla.
     `);
     loadingModal.open();
@@ -53,7 +54,7 @@ const EventRegistration = (props: any): React.ReactElement => {
       badgeFormRef.current.reset();
       setModalSuccess(true);
       setModalTitle('Gafete encontrado!');
-      setModaMessage(`Hemos encontrado su gafete virtual para el evento <b>${props.eventName}</b>.<br/><br/>
+      setModaMessage(`Hemos encontrado su gafete virtual para el evento <b>${eventName}</b>.<br/><br/>
         Le hemos enviado un correo electronico a: <b>${email}</b>. con el enlace para
         que used pueda acceder a su gafete electronico en todo momento.<br/><br/>
         Gracias.
@@ -88,7 +89,7 @@ const EventRegistration = (props: any): React.ReactElement => {
       return modal.open();
     }
     setLoadingModalTitle('Registrando usuario');
-    setLoadingModalMessage(`Un momento por favor lo estamos registrando para el evento <b>${props.eventName}</b>.
+    setLoadingModalMessage(`Un momento por favor lo estamos registrando para el evento <b>${eventName}</b>.
       Por favor no actualize esta pantalla.
     `);
     loadingModal.open();
@@ -100,7 +101,7 @@ const EventRegistration = (props: any): React.ReactElement => {
         regFormRef.current.reset();
         setModalSuccess(true);
         setModalTitle('Registro exitoso!');
-        setModaMessage(`${attr.first_name}, usted se ha registrado exitosamente al evento <b>${props.eventName}</b>.<br/><br/>
+        setModaMessage(`${attr.first_name}, usted se ha registrado exitosamente al evento <b>${eventName}</b>.<br/><br/>
           Le hemos enviado un correo electronico a: <b>${attr.email}</b>. con el enlace para
           que used pueda acceder a su gafete electronico en todo momento.<br/><br/>
           Gracias.
@@ -113,7 +114,7 @@ const EventRegistration = (props: any): React.ReactElement => {
         setModalSuccess(false);
         setModalTitle('Error procesando su registro');
         setModaMessage(`${attr.first_name}, ha ocurrido un error al intentar registrar su informacion
-          para el evento <b>${props.eventName}</b>.
+          para el evento <b>${eventName}</b>.
           <br/><br/>Por favor verifique no se haya registrado previamente a este evento.
           <br/><br/>Si sigue teniendo inconvenientes con el registro a este evento, por favor contacte
           a nuestro equipo de soporte tecnico en el siguiente correo electronico:
@@ -132,8 +133,7 @@ const EventRegistration = (props: any): React.ReactElement => {
         <EventGetBadgeForm
           formRef={badgeFormRef}
           isLoading={isLoading}
-          eventId={props.eventId}
-          eventName={props.eventName}
+          event={props.event}
           getBadgeAPICall={getBadgeAPICall} />
         <div className='col s2 hide-on-small-only'></div>
       </div>
@@ -143,6 +143,7 @@ const EventRegistration = (props: any): React.ReactElement => {
         <EventRegistrationForm
           formRef={regFormRef}
           isLoading={isLoading}
+          event={props.event}
           eventId={props.eventId}
           eventName={props.eventName}
           responsiveLetter={props.responsiveLetter}

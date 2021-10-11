@@ -46,7 +46,7 @@ export const TimeParser = (time: string): string => {
   let hour = Number(timeArray[0]);
   let dayR = 'am';
   if (hour > 12) {
-    hour -= 11;
+    hour -= 12;
     dayR = 'pm';
   }
   const minutes = timeArray[1];

@@ -8,7 +8,8 @@ import 'src/modules/events/components/event-agenda.scss';
 import * as M from 'materialize-css';
 import {
   DayMonthParser,
-  TimeParser
+  TimeParser,
+  DateParser
 } from 'src/modules/utils/date-parser';
 import Expositor from 'src/modules/events/components/expositor';
 
@@ -37,7 +38,7 @@ const TaskItem = ( props: any ): React.ReactElement => {
                   <span>{DayMonthParser(i.attributes.date)} - {TimeParser(i.attributes.starting_time)} a {TimeParser(i.attributes.ending_time)}</span>
                 </div>
                 <div className='EventAgenda__date-time hide-on-small-only red-text'>
-                  <div><i className='material-icons'>location_on</i><span>{i.attributes.location}</span></div>
+                  <div><span>{i.attributes.location}</span></div>
                   {
                     i.attributes.video_live_link ?
                       <div><i className='material-icons'>ondemand_video</i><span>Video en vivo!</span></div>
@@ -74,7 +75,8 @@ const TaskItem = ( props: any ): React.ReactElement => {
 };
 
 const EventAgenda = (props: any): React.ReactElement => {
-  console.log('>>>>> agenda', props.event);
+  const agenda = props.event.relationships.agenda;
+
   return (
     <div className='EventAgenda'>
       <HorizontalSpace size='small'/>
@@ -82,7 +84,17 @@ const EventAgenda = (props: any): React.ReactElement => {
       <div className='row'>
         <div className='col s1 hide-on-small-only'></div>
         <div className='col s12 m10'>
-          <TaskItem agenda={props.event.relationships.agenda_items.data}/>
+          {
+            agenda.map((i: any, index: number) => {
+              return (
+                <div key={index}>
+                  <span>{DateParser(i[0].attributes.date)}</span>
+                  <TaskItem agenda={i}/>
+                  <HorizontalSpace size='x-small'/>
+                </div>
+              );
+            })
+          }
         </div>
         <div className='col s1 hide-on-small-only'></div>
       </div>

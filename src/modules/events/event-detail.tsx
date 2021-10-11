@@ -21,6 +21,7 @@ import EventAgenda from 'src/modules/events/components/event-agenda';
 import { DateParser } from 'src/modules/utils/date-parser';
 import CardVertical from 'src/modules/card-vertical/card-vertical';
 import { useSelector } from 'react-redux';
+import innerSort from 'src/modules/utils/inner-sort';
 
 const eventDetailData = {
   id: '',
@@ -32,6 +33,7 @@ const eventDetailData = {
     responsive_letter: '',
     map: '',
     city: '',
+    slug: '',
     start_date: '',
     end_date: '',
     video_live_link: '',
@@ -47,11 +49,41 @@ const eventDetailData = {
     },
     agenda_items: {
       data: []
+    },
+    agenda: [],
+    zones: {
+      data: []
     }
   }
 };
-
 const mapImage = '/assets/map_icon.png';
+
+const rebuildZones = (zones: any) => {
+  const dataZones: any = {};
+  for (let j = 0; j < zones.length; j++) {
+    dataZones[zones[j].attributes.zone] = zones[j].attributes.zone;
+  }
+};
+
+const orderAgenda = (data: any) => {
+  const agenda = [...data];
+  agenda.sort(innerSort('date'));
+  const days: any = {};
+  for (let i = 0; i < agenda.length; i++) {
+    const d = new Date(agenda[i].attributes.date).getUTCDate();
+    if ( !days.hasOwnProperty(d) ) days[d] = [];
+    days[d].push(agenda[i]);
+  }
+  const daysArray = [];
+  for (const j in days) {
+    if (Object.prototype.hasOwnProperty.call(days, j)) {
+      days[j].sort(innerSort('starting_time'));
+      daysArray.push(days[j]);
+    }
+  }
+  console.log('>>> days', daysArray);
+  return daysArray;
+};
 
 const EventDetail = (props: any): React.ReactElement => {
   const system = useSelector((state: any) => state.system);
@@ -67,7 +99,7 @@ const EventDetail = (props: any): React.ReactElement => {
     M.Tabs.init(tabsComponentRef, {
       swipeable: true
     });
-    fetchData(`events?filter[slug]=${params.eventId}&include=classification,pictures,agenda_items,agenda_items.expositor`)
+    fetchData(`events?filter[slug]=${params.eventId}&include=classification,pictures,agenda_items,agenda_items.expositor,zones`)
     .then((response: any) => {
       if (response.data.length === 0) {
         console.log('Error, evento no disponible');
@@ -75,10 +107,14 @@ const EventDetail = (props: any): React.ReactElement => {
       }
       const eventDetailData = response.data[0];
       if (!eventDetailData) return history.replace('/');
+      eventDetailData.relationships.zones.data = rebuildZones(eventDetailData.relationships.zones.data);
+      eventDetailData.relationships.agenda = orderAgenda(eventDetailData.relationships.agenda_items.data);
       setEvent(eventDetailData);
       props.setLogo(eventDetailData.attributes.img_logo);
       props.setLogoURL(`/${eventDetailData.attributes.slug}`);
-      setExpositors(response.included.filter((e: any) => e.type === 'Expositor'));
+      const expositors = response.included.filter((e: any) => e.type === 'Expositor' && !e.attributes.hidden );
+      expositors.sort(innerSort('order'));
+      setExpositors(expositors);
     })
     .catch((error) => {
       console.log('Hubo un error', error);
@@ -118,34 +154,29 @@ const EventDetail = (props: any): React.ReactElement => {
               live={event.attributes.video_live_link}
               mapImage={mapImageURL}
               borderRadiusMapImage='35px'
+              eventSlug={event.attributes.slug}
               mapAddress={event.attributes.address}
               linkFacebook={event.attributes.facebook_link}
               linkImstagram={event.attributes.instagram_link}
               linktwitter={event.attributes.twitter_link}
               linkYoutube={event.attributes.youtube_link} />
-              <HorizontalSpace size='large'/>
+            <HorizontalSpace size='large'/>
           </div>
           <SubTitle text='Presentadores'/>
           <div className='row'>
           {
             expositors.map((e: any, index: number) => {
               return (
-                <Expositor
-                  key={index}
-                  size='col s6 m3'
-                  image={e.attributes.img_picture}
-                  text={e.attributes.title}
-                  link={e.attributes.link}
-                  colorAccess='red-text text-darken-2'
-                  textAccess='Ver mas' />
+                <Expositor key={index} size='col s6 m3' image={e.attributes.img_picture}
+                  text={e.attributes.title} link={e.attributes.link} colorAccess='red-text text-darken-2' />
               );
             })
           }
           </div>
-          <HorizontalSpace size='x-small'/>
+          <HorizontalSpace size='small'/>
         </div>
         <div id='registro' className='col s12'>
-          <EventRegistration
+          <EventRegistration event={event}
             responsiveLetter={event.attributes.responsive_letter}
             eventId={event.id}
             eventName={event.attributes.title} />
@@ -153,6 +184,7 @@ const EventDetail = (props: any): React.ReactElement => {
         </div>
         <div id='agenda' className='col s12'>
           <EventAgenda event={event} expositors={expositors} />
+          <HorizontalSpace size='x-small'/>
         </div>
         <div id='mapa' className='col s12'>
           <HorizontalSpace size='small'/>
