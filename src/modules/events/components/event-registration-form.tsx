@@ -1,4 +1,8 @@
-import React, { useState } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useRef
+} from 'react';
 import {
   CommonInput,
   InputImgFile
@@ -6,6 +10,8 @@ import {
 import { ButtonDownload } from 'src/modules/forms/buttons';
 import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import SubTitle from 'src/modules/sub-title/sub-title';
+import { APIGet } from 'src/api/communicator';
+import * as M from 'materialize-css';
 
 const EventRegistrationForm = (props: any): React.ReactElement => {
   const [covidTestResultImage, setCovidTestResultImage] = useState('');
@@ -18,12 +24,31 @@ const EventRegistrationForm = (props: any): React.ReactElement => {
   const [phone, setPhone] = useState(null);
   const [emergencyPhone, setEmergencyPhone] = useState(null);
   const [imgUser, setImgUser] = useState('');
+  const citiesRef: any = useRef(null);
+  const zonesRef: any = useRef(null);
+  const eventName = props.event.attributes.title;
+  const zones = props.event.relationships.zones.data;
+  M.Autocomplete.init(zonesRef.current, { data: zones });
+
+  useEffect(() => {
+    APIGet('/assets/cities.json', false)
+      .then((response: any) => {
+        const data: any = {};
+        for (let i = 0; i < response.length; i++) {
+          data[response[i].city] = response[i].city;
+        }
+        M.Autocomplete.init(citiesRef.current, { data: data });
+      })
+      .catch((error) => {
+        console.log('Hubo un error cities', error);
+      });
+  }, [APIGet, M]);
 
   return (
     <form className='col s12 m8' ref={props.formRef}>
       <SubTitle text='Nuevo registro al evento'/>
       <p className='EventRegistration__text-instrucctions grey-text text-darken-3'>
-        Por favor complete el siguiente formulario para registrarse a {props.eventName}.
+        Por favor complete el siguiente formulario para registrarse a {eventName}.
         Todos los campos marcados con un * al final son obligatorios.
       </p>
       <CommonInput textInput='Nombre(s) *' type='text' id='first_name' onChange={(e: any) => {
@@ -32,10 +57,10 @@ const EventRegistrationForm = (props: any): React.ReactElement => {
       <CommonInput textInput='Apellidos *' type='text' id='last_name' onChange={(e: any) => {
         setLastName(e.target.value);
       }} placeholder='Ingrese respuesta' validate={true} disabled={props.isLoading} />
-      <CommonInput textInput='Ciudad *' type='text' id='city' onChange={(e: any) => {
+      <CommonInput textInput='Ciudad *' type='text' id='city' reference={citiesRef} onChange={(e: any) => {
         setCity(e.target.value);
       }} placeholder='Ingrese respuesta' validate={true} disabled={props.isLoading} />
-      <CommonInput textInput='Zona' type='text' id='zone' onChange={(e: any) => {
+      <CommonInput textInput='Zona' type='text' id='zone' reference={zonesRef} onChange={(e: any) => {
         setZone(e.target.value);
       }} placeholder='Ingrese respuesta' validate={true} disabled={props.isLoading} />
       <CommonInput textInput='Correo eléctronico *' type='email' id='email' onChange={(e: any) => {
@@ -49,7 +74,7 @@ const EventRegistrationForm = (props: any): React.ReactElement => {
       }} placeholder='Ingrese respuesta' maxLength='10' disabled={props.isLoading} />
       <HorizontalSpace size='xx-small' />
       <p className='EventRegistration__text-instrucctions grey-text text-darken-3'>
-        Opcionalmente puede agregar una foto para su gafete de {props.eventName}.
+        Opcionalmente puede agregar una foto para su gafete de {eventName}.
       </p>
       <InputImgFile
         src={imgUser}
@@ -60,7 +85,7 @@ const EventRegistrationForm = (props: any): React.ReactElement => {
       <HorizontalSpace size='xx-small' />
       <p className='EventRegistration__text-instrucctions grey-text text-darken-3'>
         Si usted tiene su prueba de COVID y/o carta responsiva firmada,
-        por favor adjunte una foto de esos documentos.
+        por favor adjunte una foto de esos documentos. <b>(Solo formato de fotos e imagenes son admitidas) </b>
         Si necesita una copia de la carta responsiva, por favor de clic
         en el boton de abajo, gracias.
       </p>
@@ -89,7 +114,7 @@ const EventRegistrationForm = (props: any): React.ReactElement => {
                 city: city, zone: zone, email: email,
                 phone: phone, emergency_phone: emergencyPhone
               },
-              relationships: {event: {data: {type: 'Event', id: props.eventId}}}
+              relationships: {event: {data: {type: 'Event', id: props.event.id}}}
             }
           };
           if ( covidTestResultImage ) {

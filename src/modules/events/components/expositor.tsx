@@ -11,7 +11,7 @@ const Expositor = (props: any): React.ReactElement => {
         </div>
         <div className='Expositor__containerText'>
           <div className='Expositor__presentText grey-text text-darken-4'>{props.text}</div>
-          <div className={`Expositor__accesText ${props.colorAccess}`}>{props.textAccess}</div>
+          <div className={`Expositor__accesText ${props.colorAccess}`}>Ver mas</div>
         </div>
       </div>
     </a>

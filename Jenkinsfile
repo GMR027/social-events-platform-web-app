@@ -36,7 +36,7 @@ pipeline {
         }
         stage("Build & push docker image") {
             steps {
-                sh "sudo docker build --build-arg REACT_APP_API_URL=$REACT_APP_API_URL -t $APP_FOLDER ."
+                sh "sudo docker build --memory 300m --build-arg REACT_APP_API_URL=$REACT_APP_API_URL -t $APP_FOLDER ."
                 sh "sudo docker tag $APP_FOLDER longmont.iguzman.com.mx:5000/$APP_FOLDER:1.0"
                 sh "sudo docker push longmont.iguzman.com.mx:5000/$APP_FOLDER:1.0"
             }

@@ -23,7 +23,7 @@ const EventGetBadgeForm = (props: any): React.ReactElement => {
               type: 'RetrieveBadge',
               attributes: {
                 email: email,
-                event: props.eventId
+                event: props.event.id
               }
             }
           };
