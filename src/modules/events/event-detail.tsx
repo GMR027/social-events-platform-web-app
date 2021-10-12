@@ -19,8 +19,6 @@ import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import SubTitle from 'src/modules/sub-title/sub-title';
 import EventAgenda from 'src/modules/events/components/event-agenda';
 import { DateParser } from 'src/modules/utils/date-parser';
-// import CardVertical from 'src/modules/card-vertical/card-vertical';
-// import { useSelector } from 'react-redux';
 import innerSort from 'src/modules/utils/inner-sort';
 import GeneralInformationComponent from 'src/modules/general-information-tab/general-information-tab';
 
@@ -65,12 +63,12 @@ const eventDetailData = {
 };
 // const mapImage = '/assets/map_icon.png';
 
-const rebuildZones = (zones: any) => {
-  const dataZones: any = {};
-  for (let j = 0; j < zones.length; j++) {
-    dataZones[zones[j].attributes.zone] = zones[j].attributes.zone;
-  }
-};
+// const rebuildZones = (zones: any) => {
+//   const dataZones: any = {};
+//   for (let j = 0; j < zones.length; j++) {
+//     dataZones[zones[j].attributes.zone] = zones[j].attributes.zone;
+//   }
+// };
 
 const orderAgenda = (data: any) => {
   const agenda = [...data];
@@ -88,19 +86,15 @@ const orderAgenda = (data: any) => {
       daysArray.push(days[j]);
     }
   }
-  console.log('>>> days', daysArray);
   return daysArray;
 };
 
 const EventDetail = (props: any): React.ReactElement => {
-  // const system = useSelector((state: any) => state.system);
-  // const prefix = system.platform.prefix;
   const tabsComponentRef: any = useRef(null);
   const history = useHistory();
   const params: any = useParams();
   const [event, setEvent] = useState(eventDetailData);
   const [expositors, setExpositors] = useState([]);
-  // const mapImageURL = `${prefix}${mapImage}`;
 
   useEffect(() => {
     M.Tabs.init(tabsComponentRef, {
@@ -114,8 +108,8 @@ const EventDetail = (props: any): React.ReactElement => {
       }
       const eventDetailData = response.data[0];
       if (!eventDetailData) return history.replace('/');
-      eventDetailData.relationships.zones.data = rebuildZones(eventDetailData.relationships.zones.data);
       eventDetailData.relationships.agenda = orderAgenda(eventDetailData.relationships.agenda_items.data);
+      // props.event.relationships.zones.data = props.event.relationships.zones.data.sort(innerSort('zone'));
       setEvent(eventDetailData);
       props.setLogo(eventDetailData.attributes.img_logo);
       props.setLogoURL(`/${eventDetailData.attributes.slug}`);
