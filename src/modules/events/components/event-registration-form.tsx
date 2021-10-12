@@ -12,6 +12,7 @@ import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import SubTitle from 'src/modules/sub-title/sub-title';
 import { APIGet } from 'src/api/communicator';
 import * as M from 'materialize-css';
+import innerSort from 'src/modules/utils/inner-sort';
 
 const EventRegistrationForm = (props: any): React.ReactElement => {
   const [covidTestResultImage, setCovidTestResultImage] = useState('');
@@ -27,8 +28,7 @@ const EventRegistrationForm = (props: any): React.ReactElement => {
   const citiesRef: any = useRef(null);
   const zonesRef: any = useRef(null);
   const eventName = props.event.attributes.title;
-  const zones = props.event.relationships.zones.data;
-  M.Autocomplete.init(zonesRef.current, { data: zones });
+  M.FormSelect.init(zonesRef.current, {});
 
   useEffect(() => {
     APIGet('/assets/cities.json', false)
@@ -48,7 +48,7 @@ const EventRegistrationForm = (props: any): React.ReactElement => {
     <form className='col s12 m8' ref={props.formRef}>
       <SubTitle text='Nuevo registro al evento'/>
       <p className='EventRegistration__text-instrucctions grey-text text-darken-3'>
-        Por favor complete el siguiente formulario para registrarse a {eventName}.
+        Por favor complete el siguiente formulario para registrarse a la {eventName}.
         Todos los campos marcados con un * al final son obligatorios.
       </p>
       <CommonInput textInput='Nombre(s) *' type='text' id='first_name' onChange={(e: any) => {
@@ -60,9 +60,26 @@ const EventRegistrationForm = (props: any): React.ReactElement => {
       <CommonInput textInput='Ciudad *' type='text' id='city' reference={citiesRef} onChange={(e: any) => {
         setCity(e.target.value);
       }} placeholder='Ingrese respuesta' validate={true} disabled={props.isLoading} />
-      <CommonInput textInput='Zona' type='text' id='zone' reference={zonesRef} onChange={(e: any) => {
-        setZone(e.target.value);
-      }} placeholder='Ingrese respuesta' validate={true} disabled={props.isLoading} />
+      <div className='input-field' onClick={() => {
+          props.event.relationships.zones.data = props.event.relationships.zones.data.sort(innerSort('zone'));
+        }}>
+        <select ref={zonesRef} onChange={(e: any) => {
+          props.event.relationships.zones.data = props.event.relationships.zones.data.sort(innerSort('zone'));
+          setZone(e.target.value);
+        }}>
+          <option value='' disabled selected>Seleccione su plaza</option>
+          {
+            props.event.relationships.zones.data.map((i: any, index: number) => {
+              return (
+                <option
+                  key={index}
+                  value={i.attributes.zone}>{i.attributes.zone}</option>
+              );
+            })
+          }
+        </select>
+        <label>Plaza</label>
+      </div>
       <CommonInput textInput='Correo eléctronico *' type='email' id='email' onChange={(e: any) => {
         setEmail(e.target.value);
       }} placeholder='Ingrese respuesta' validate={true} disabled={props.isLoading} />
@@ -74,7 +91,7 @@ const EventRegistrationForm = (props: any): React.ReactElement => {
       }} placeholder='Ingrese respuesta' maxLength='10' disabled={props.isLoading} />
       <HorizontalSpace size='xx-small' />
       <p className='EventRegistration__text-instrucctions grey-text text-darken-3'>
-        Opcionalmente puede agregar una foto para su gafete de {eventName}.
+        Opcionalmente puede agregar una foto para su gafete de la {eventName}.
       </p>
       <InputImgFile
         src={imgUser}

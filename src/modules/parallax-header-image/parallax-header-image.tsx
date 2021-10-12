@@ -8,14 +8,14 @@ const ParallaxHeaderImage = (props: any): React.ReactElement => {
       <div
         className={`ParallaxHeaderImage${props.size ? `--${props.size}` : ''}`}
         style={{backgroundImage: `url(${props.image})`}}>
-        <div
+        {/* <div
           className='IndicatorEventCity container'>
             <div className='IndicatorEventCity__indicator red darken-2'>
               <div className='IndicatorEventCity__textIcon white-text'>
                 <i className='material-icons left'>pin_drop</i>{props.city}
               </div>
             </div>
-          </div>
+          </div> */}
         <div
           className='ParallaxHeaderImage__info'
           style={{
