@@ -7,7 +7,7 @@ const EventGetBadgeForm = (props: any): React.ReactElement => {
 
   return (
     <form className='col s12 m8' ref={props.formRef}>
-      <SubTitle text='¿Ya esta registrado? '/>
+      <SubTitle text='¿Ya está usted registrado?'/>
       <p className='EventRegistration__text-instrucctions grey-text text-darken-3'>
         Si usted ya esta registrado a este evento y requiere acceder a su gafete virual,
         por favor ingrese su correo electronico y le enviaremos un correo con el enlace
