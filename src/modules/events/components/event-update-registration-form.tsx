@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { CommonInput } from 'src/modules/forms/inputs';
 import SubTitle from 'src/modules/sub-title/sub-title';
 
-const EventGetBadgeForm = (props: any): React.ReactElement => {
+const EventUpdateRegistrationForm = (props: any): React.ReactElement => {
   const [email, setEmail] = useState(null);
 
   return (
@@ -33,4 +33,4 @@ const EventGetBadgeForm = (props: any): React.ReactElement => {
   );
 };
 
-export default EventGetBadgeForm;
+export default EventUpdateRegistrationForm;

@@ -53,6 +53,20 @@ export const TimeParser = (time: string): string => {
   return `${hour}:${minutes}${dayR}`;
 };
 
+export const EventDateParser = (date1: string, date2: string): string => {
+  const parsedDate1 = new Date(date1);
+  const month1 = months[parsedDate1.getMonth()];
+  const day1 = parsedDate1.getUTCDate();
+  const parsedDate2 = new Date(date2);
+  const month2 = months[parsedDate2.getMonth()];
+  const day2 = parsedDate2.getUTCDate();
+
+  if ( month1 === month2 ) {
+    return `Del ${day1} al ${day2} de ${month1}`;
+  }
+  return `Del ${day1} de ${month1} al ${day2} de ${month2}`;
+};
+
 export const ArrayErrorsToHTMLList = ( errors: Array<any> ): string => {
   let errorMessages = '';
   errors.forEach((i: any) => {

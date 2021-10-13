@@ -102,7 +102,8 @@ const EventRegistrationForm = (props: any): React.ReactElement => {
       <HorizontalSpace size='xx-small' />
       <p className='EventRegistration__text-instrucctions grey-text text-darken-3'>
         Si usted tiene su prueba de COVID y/o carta responsiva firmada,
-        por favor adjunte una foto de esos documentos. <b>(Solo formato de fotos e imagenes son admitidas) </b>
+        por favor adjunte una foto de esos documentos. <b>(Solo formato de fotos e imagenes son admitidas,
+        archivos PDF no son compatibles en este momento.) </b>
         Si necesita una copia de la carta responsiva, por favor de clic
         en el boton de abajo, gracias.
       </p>
