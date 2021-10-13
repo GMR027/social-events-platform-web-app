@@ -6,6 +6,7 @@ import { APIPost } from 'src/api/communicator';
 import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import EventRegistrationForm from 'src/modules/events/components/event-registration-form';
 import EventGetBadgeForm from 'src/modules/events/components/event-get-badge-form';
+// import EventUpdateRegistrationForm from 'src/modules/events/components/event-update-registration-form';
 import 'src/modules/events/components/event-registration.scss';
 import Modal from 'src/modules/modal/modal';
 import LoadingModal from 'src/modules/loading-modal/loading-modal';

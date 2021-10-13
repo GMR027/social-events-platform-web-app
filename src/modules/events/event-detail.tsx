@@ -18,7 +18,9 @@ import ImageSimple from 'src/modules/events/components/image-simple';
 import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import SubTitle from 'src/modules/sub-title/sub-title';
 import EventAgenda from 'src/modules/events/components/event-agenda';
-import { DateParser } from 'src/modules/utils/date-parser';
+import {
+  EventDateParser
+} from 'src/modules/utils/date-parser';
 import innerSort from 'src/modules/utils/inner-sort';
 import GeneralInformationComponent from 'src/modules/general-information-tab/general-information-tab';
 
@@ -130,11 +132,7 @@ const EventDetail = (props: any): React.ReactElement => {
         image={event.attributes.img_cover}
         title={event.attributes.title}
         city={event.attributes.city}
-        location={`Del ${
-          event.attributes.start_date ? DateParser(event.attributes.start_date) : null
-        } al ${
-          event.attributes.end_date ? DateParser(event.attributes.end_date) : null
-        }`} />
+        location={EventDateParser(event.attributes.start_date, event.attributes.end_date)} />
       <div className='container'>
         <ul className='tabs Stand__tabs' ref={tabsComponentRef}>
           <li className='tab col s3'><a href='#inicio' className='active'>Inicio</a></li>
@@ -166,22 +164,6 @@ const EventDetail = (props: any): React.ReactElement => {
           <div className='col s12'>
             <HorizontalSpace size='x-small'/>
           </div>
-          {/* <div className='col s12 m3 container'>
-            <CardVertical
-              margin='2em 0 0'
-              borderRadius='8px'
-              padding='1em .5em .5em'
-              live={event.attributes.video_live_link}
-              mapImage={mapImageURL}
-              borderRadiusMapImage='35px'
-              eventSlug={event.attributes.slug}
-              mapAddress={event.attributes.address}
-              linkFacebook={event.attributes.facebook_link}
-              linkImstagram={event.attributes.instagram_link}
-              linktwitter={event.attributes.twitter_link}
-              linkYoutube={event.attributes.youtube_link} />
-            <HorizontalSpace size='large'/>
-          </div> */}
         </div>
         <div id='registro' className='col s12'>
           <EventRegistration event={event}
