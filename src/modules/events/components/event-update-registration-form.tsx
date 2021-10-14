@@ -16,7 +16,7 @@ const EventUpdateRegistrationForm = (props: any): React.ReactElement => {
 
   return (
     <form className='col s12 m8' ref={props.formRef}>
-      <SubTitle text='Subir prueba de COVID y/o carta responsiva despues del registro'/>
+      <SubTitle text='¿Ya está registrado y desea enviar documentos faltantes?'/>
       <p className='EventRegistration__text-instrucctions grey-text text-darken-3'>
         Si usted ya esta registrado a este evento y requiere subir su prueba de COVID actualizada y/o su carta responsiva firmada, por favor utilize el siguiente formulario para subir sus documentos.
         <b>Nota importante: Solo formato de fotos e imagenes son admitidas, archivos PDF no son compatibles en este momento.</b>

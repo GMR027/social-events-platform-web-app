@@ -75,6 +75,8 @@ const EventRegistration = (props: any): React.ReactElement => {
     }
     const valid = validData(data);
     if ( valid !== 'ok' ) {
+      setIsLoading(false);
+      loadingModal.close();
       setModalSuccess(false);
       setModalTitle('Error actualizando su registro');
       setModaMessage(`${valid}<br><br>Gracias.`);
@@ -156,6 +158,8 @@ const EventRegistration = (props: any): React.ReactElement => {
     }
     const valid = validData(data);
     if ( valid !== 'ok' ) {
+      setIsLoading(false);
+      loadingModal.close();
       setModalSuccess(false);
       setModalTitle('Error en sus datos');
       setModaMessage(`${valid}<br><br>Gracias.`);
