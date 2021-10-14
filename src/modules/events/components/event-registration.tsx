@@ -89,6 +89,8 @@ const EventRegistration = (props: any): React.ReactElement => {
     APIGet(`user-registrations/?filter[email]=${email}`)
     .then((response) => {
       if ( !response.data.length ) {
+        setIsLoading(false);
+        loadingModal.close();
         setModalSuccess(false);
         setModalTitle('Error actualizando su registro');
         setModaMessage('No encontramos ningun registro asociado a su correo eléctronico. Por favor verifique que haya ingresado correctamente su correo eléctronico o que se haya registrado a este evento.<br><br>Gracias.');
